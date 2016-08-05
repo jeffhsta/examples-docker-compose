@@ -1,0 +1,12 @@
+mongodb:
+  image: mongo:2.6.8
+  expose:
+    - "27017"
+  ports:
+    - "27017:27017"
+  command: mongod --smallfiles --replSet "test"
+dbConfig:
+  image: mongo:2.6.8
+  command: mongo db/local --eval "printjson(rs.initiate())"
+  links:
+    - db
